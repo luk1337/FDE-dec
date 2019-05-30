@@ -1,3 +1,18 @@
+*** v4.03 ***
+— EAS tweaks fixes
+— Input boost tweak fixed
+— Better AI machine learning
+— Updated build.prop tweaks
+— AI better thermal handling
+— Updated ART tweaks
+— WiFi tweak fixes
+— Smarter CPU tweak
+— Smarter AI GPUturbo
+— More smart AI logic overall
+— misc.
+
+
+
 *** v4.02 ***
 — Minor update
 — Fixed AI machine learning
