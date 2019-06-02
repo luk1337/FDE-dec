@@ -1,3 +1,18 @@
+*** v4.04 ***
+— Network tweak fixes
+— AI RAM management fixes
+— Smarter AI machine learning
+— Machine learning data storing logic
+— Smarter build.prop tweaks
+— Better device detection
+— Fixed AI thermal managment
+— Better AI CPU turbo logic
+— Updated CPU tweaks
+— Vivante GPU support
+— misc.
+
+
+
 *** v4.03 ***
 — EAS tweaks fixes
 — Input boost tweak fixed
