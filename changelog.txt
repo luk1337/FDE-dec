@@ -1,3 +1,19 @@
+*** v4.05 ***
+— AI processes optimization support
+— AI power-saving logic fixes
+— AI machine learning improvement
+— AI GPU throttling control
+— AI machine learning realtime kernel tune-up
+— EAS tweak fixes
+— Doze settings tuned
+— VM tweaks tuned
+— Better custom zRAM detection
+— CPU tweak fix
+— Typo fixes
+— misc.
+
+
+
 *** v4.04 ***
 — Network tweak fixes
 — AI RAM management fixes
