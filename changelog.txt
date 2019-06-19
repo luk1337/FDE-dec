@@ -1,3 +1,24 @@
+*** v4.06 ***
+— Whole code revised & optimized
+— Built with latest CLANG toolchain with max optimizations
+— Bulletproof (no code stuck) FDE execution
+— Removed some unstable tweaks
+— Better Android Pie support
+— Disabled forcing fast charge mode
+— Removed network packet queues optimization
+— Updated sqlite tweaks
+— DalvikVM multithreading optimization
+— Updated network tweaks
+— Updated device information methods
+— Updated I/O tweaks
+— Tuned kernel tweaks
+— Updated & fixed CPU tweaks
+— AI modules logic improvements
+— AI support custom thermal engines
+— misc.
+
+
+
 *** v4.05 ***
 — AI processes optimization support
 — AI power-saving logic fixes
