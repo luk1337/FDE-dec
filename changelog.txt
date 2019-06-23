@@ -1,7 +1,24 @@
+*** v4.07 ***
+— Extended Mali GPU turbo support
+— Enhanced Mali GPU turbo support
+— Enhanced Adreno GPU turbo support
+— Removed CPU throttling optimization
+— Optimized Adreno Idler
+— Better AI GPU throttling control (stock-assistant)
+— Fixed CPU EAS tweaks
+— Extended CPU turbo support
+— Fixed AI machine learning for Mali GPUs
+— Enhanced Fixed AI machine learning
+— CPU tweak fixes
+— Exynos CPU better support
+— misc.
+
+
+
 *** v4.06 ***
 — Whole code revised & optimized
 — Built with latest CLANG toolchain with max optimizations
-— Bulletproof (no code stuck) FDE execution
+— Bulletproof (no code stuck) FDE exection
 — Removed some unstable tweaks
 — Better Android Pie support
 — Disabled forcing fast charge mode
@@ -9,7 +26,7 @@
 — Updated sqlite tweaks
 — DalvikVM multithreading optimization
 — Updated network tweaks
-— Updated device information methods
+— Updated device infromation methods
 — Updated I/O tweaks
 — Tuned kernel tweaks
 — Updated & fixed CPU tweaks
