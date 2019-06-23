@@ -8,7 +8,7 @@
 — Fixed CPU EAS tweaks
 — Extended CPU turbo support
 — Fixed AI machine learning for Mali GPUs
-— Enhanced Fixed AI machine learning
+— Enhanced AI machine learning
 — CPU tweak fixes
 — Exynos CPU better support
 — misc.
