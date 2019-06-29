@@ -1,3 +1,18 @@
+*** v4.09 ***
+— Heavily fixed AI CPU turbo logic
+— EAS tweaks tune-up
+— CPU tweak bug fix
+— Better system processes optimization
+— Improved GPU turbo mode for Adreno and Mali GPUs
+— Various bugfixes
+— FDE threads priority optimization
+— Removed zRAM optimizations
+— Extended CPU turbo support
+— VM tweaks tune-up
+— misc.
+
+
+
 *** v4.08 ***
 — AI force deep Doze mode when screen off
 — Machine learning takes charging state in account
