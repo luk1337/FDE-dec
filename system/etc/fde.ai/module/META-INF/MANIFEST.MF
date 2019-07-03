@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Created-By: 1.0 (Android SignApk)
+
+Name: AndroidManifest.xml
+SHA1-Digest: IsytFY25JIwX65Qlz3ntD4UeYb8=
+
+Name: META-INF/com/android/otacert
+SHA1-Digest: 6GAKKwbd27pAxav9Sz7XpY9fCQk=
+
+Name: res/layout/main.xml
+SHA1-Digest: kjVZcVdqikwL8+vgzKzt0v7qtig=
+
+Name: resources.arsc
+SHA1-Digest: s9to3WCbYGVowfDaaERORuO9VVE=
+
+Name: classes.dex
+SHA1-Digest: NyD8/4JuO2obxq3KzNGiaYPLCEo=
+

@@ -1,0 +1,19 @@
+Signature-Version: 1.0
+SHA1-Digest-Manifest: 3AS8Y3RFKltXnUik5KkefIYh7gA=
+Created-By: 1.0 (Android SignApk)
+
+Name: AndroidManifest.xml
+SHA1-Digest-Manifest: uDiIxDT0+Xw+oeamgKmvHRvoY2c=
+
+Name: META-INF/com/android/otacert
+SHA1-Digest-Manifest: 9/3oM3Lmekl3KKPmNM0n2RnbE70=
+
+Name: res/layout/main.xml
+SHA1-Digest-Manifest: nMOymMFgcDRx5uG/Gl8GBjXB0Xw=
+
+Name: resources.arsc
+SHA1-Digest-Manifest: k5e2X5lbd7RTS1p8EgVxaiWM4Ak=
+
+Name: classes.dex
+SHA1-Digest-Manifest: 1NxWwzcAyoe3Z/iCVw09PsAPTF8=
+
