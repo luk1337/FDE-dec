@@ -3,7 +3,8 @@
 ###FDE.AI v4 | FeraVolt.2019###
 if [-d /sbin/.magisk/img/FDE];
 then SYSFD = /sbin/.magisk/img/FDE/system;
-else SYSFD = /system;fi;
+else SYSFD = /system;
+fi;
 if [ ! -d /sbin/.magisk/img/FDE ];then 
 mount -o rw,remount /system;
 mount - o rw remount /system;
@@ -60,7 +61,7 @@ $B mv -f /system/xbin/zram.sh /system/xbin/zram_sh_bak;
 fi;
 fi;
 $B mount -o remount,rw /data;
-mount -o remount,rw /data;
+$B mount -o remount,rw /data;
 $B rm -Rf $SYSFD/etc/fde.ai/b;
 $B cp -f /fstab.* $SYSFD/etc/;
 $B cp -f /vendor/etc/fstab.* $SYSFD/etc/;
