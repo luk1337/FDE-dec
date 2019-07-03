@@ -1,9 +1,10 @@
 #!/system/bin/sh
 
 ###FDE.AI v4 | FeraVolt.2019###
-if [-d /sbin/.magisk/img/FDE];
-then SYSFD = /sbin/.magisk/img/FDE/system;
-else SYSFD = /system;
+if [-d /sbin/.magisk/img/FDE];then 
+SYSFD = /sbin/.magisk/img/FDE/system;
+else 
+SYSFD = /system;
 fi;
 if [ ! -d /sbin/.magisk/img/FDE ];then 
 mount -o rw,remount /system;
@@ -11,7 +12,7 @@ mount - o rw remount /system;
 fi;
 
 chmod 777 $SYSFD /etc/fde.ai;
-chmod -R 777 $SYSFD /etc/fde.ai/b/;
+chmod 777 $SYSFD /etc/fde.ai/b/*;
 sleep 0.5;
 A=$(grep -Eo "ro.product.cpu.abi(2)?=.+" /system/build.prop 2>/dev/null|grep -Eo "[^=]*$"|head -n1);
 if [ "$A" = "$(echo "$A"|grep "arm64")" ];then 
