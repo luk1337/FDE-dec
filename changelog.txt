@@ -1,3 +1,18 @@
+*** v4.10 ***
+— AI Force-Doze fixes (not forcing to deep idle immediately)
+— AI better screen state detection
+— Kernel tweaks updated
+— Fixed magisk.log cleanup
+— Enchanced AI processes optimization
+— AI GPU turbo fixes for Adreno GPUs
+— Smarter AI CPU turbo trigger loggic
+— Smarter AI GPU turbo trigger loggic
+— Varoius bugfixes
+— New FDE logo, credits to xLidz
+— misc.
+
+
+
 *** v4.09 ***
 — Heavily fixed AI CPU turbo logic
 — EAS tweaks tune-up
@@ -9,7 +24,6 @@
 — Removed zRAM optimizations
 — Extended CPU turbo support
 — VM tweaks tune-up
-— New FDE logo, credits to xLidz
 — misc.
 
 
