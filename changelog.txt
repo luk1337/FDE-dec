@@ -9,6 +9,7 @@
 — Removed zRAM optimizations
 — Extended CPU turbo support
 — VM tweaks tune-up
+— New FDE logo, credits to xLidz
 — misc.
 
 
