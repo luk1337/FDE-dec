@@ -6,7 +6,8 @@ export PATH=/sbin:/system/sbin:/system/bin:/system/xbin;
 $B mount -o remount,rw /data;mount -o remount,rw /data;
 $B mount -t debugfs none /sys/kernel/debug;mount -t debugfs none /sys/kernel/debug;
 $B chmod 0755 /sys/kernel/debug;
-$B chmod -R 777 /cache/*;if [ ! -e /etc/fstab ];then 
+$B chmod -R 777 /cache/*;
+if [ ! -e /etc/fstab ];then 
 $B mount -o bind /sbin/.magisk/img/FDE/system/etc/fstab /etc/fstab;
 fi;
 for gf in $($B mount|$B grep f2fs|$B cut -d " " -f3);do 
@@ -310,8 +311,7 @@ $B echo "$(date +%X) - Патч SafetyNET">>$L;
 else $B echo "$(date +%X) - Patching SafetyNET">>$L;
 fi;
 $B kill -9 "$($B pgrep com.google.android.gms.unstable)";
-$B sed 's/ORANGE/GREEN/i' /proc/cmdline|
-$B sed 's/YELLOW/GREEN/i'>/data/local/tmp/cmdline;
+$B sed 's/ORANGE/GREEN/i' /proc/cmdline|$B sed 's/YELLOW/GREEN/i'>/data/local/tmp/cmdline;
 $B chmod 644 /data/local/tmp/cmdline;
 $B mount -o bind /data/local/tmp/cmdline /proc/cmdline;
 fi;
@@ -323,7 +323,8 @@ $B rm -f /fde.ai/s/bb.so;
 $B rm -f /fde.ai/s/dd.so;
 if [ -n "$RUS" ];then 
 $B echo "Всё прошло успешно.">>$L;
-else $B echo "ALL is GOOD.">>$L;
+else 
+$B echo "ALL is GOOD.">>$L;
 fi;
 $B echo " ">>$L;
 input keyevent 224;
