@@ -1,7 +1,7 @@
 #!/system/bin/sh
 
-if [-e /sys/power/wake_lock];
-then echo "fde_ai" > /sys/power/wake_lock;
+if [-e /sys/power/wake_lock]; then 
+echo "fde_ai" > /sys/power/wake_lock;
 fi;
 
 while true;
@@ -15,27 +15,27 @@ sleep 3;
 fi;
 done;
 
-if [-e /system/etc/fde.ai/i.sh];then
+if [ -e /system/etc/fde.ai/i.sh]; then
 /system/etc/fde.ai/i.sh;
 rm -f /system/etc/fde.ai/i.sh;
 fi;
 
 B = /system/etc/fde.ai/busybox;
-mount - o remount, rw /;
-mount - o remount rw /;
-$B mount - o remount, rw /;
+mount -o remount, rw /;
+mount -o remount rw /;
+$B mount -o remount, rw /;
 $B rm -Rf /fde.ai;
 $B mkdir /fde.ai;
-mount -t tmpfs - o size = 6 M tmpfs /fde.ai;
+mount -t tmpfs -o size=6M tmpfs /fde.ai;
 
-$B mount -t tmpfs - o size = 6 M tmpfs /fde.ai;
+$B mount -t tmpfs -o size=6M tmpfs /fde.ai;
 $B sleep 0.5;
 
-if [!-d /bin]; then
+if [! -d /bin]; then
 $B ln -s /system/bin /bin;
 fi;
 
-if [!-e /bin/sh]; then
+if [! -e /bin/sh]; then
 $B ln -s /system/bin/sh /bin/sh;
 fi;
 
