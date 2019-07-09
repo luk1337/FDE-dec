@@ -3,34 +3,43 @@
 B=/fde.ai/busybox;
 L=/sdcard/fde.txt;
 export PATH=/sbin:/system/sbin:/system/bin:/system/xbin;
-$B mount -o remount,rw /data;mount -o remount,rw /data;
-$B mount -t debugfs none /sys/kernel/debug;mount -t debugfs none /sys/kernel/debug;
+$B mount -o remount,rw /data;
+mount -o remount,rw /data;
+$B mount -t debugfs none /sys/kernel/debug;
+mount -t debugfs none /sys/kernel/debug;
 $B chmod 0755 /sys/kernel/debug;
 $B chmod -R 777 /cache/*;
+
 if [ ! -e /etc/fstab ];then 
 $B mount -o bind /sbin/.magisk/img/FDE/system/etc/fstab /etc/fstab;
 fi;
+
 for gf in $($B mount|$B grep f2fs|$B cut -d " " -f3);do 
 $B mount -o remount,nobarrier "${gf}";
 done;
+
 for x in $($B mount|$B grep ext4|$B cut -d " " -f3);do 
 $B mount -o remount,noatime,nodiratime,nobarrier,nodiscard,max_batch_time=30000,min_batch_time=10000,commit=21 "${x}";
 done;
+
 RUS=$(getprop persist.sys.locale|$B grep -o "ru-");
 S=$(getprop ro.build.version.sdk);
 R=$($B free -m|$B awk '{ print $2 }'|$B sed -n 2p);
 Rfree=$($B free -m|$B awk '{ print $4 }'|$B sed -n 2p);
 Ravail=$($B free -m|$B awk '{ print $7 }'|$B sed -n 2p);
 A=$(grep -Eo "ro.product.cpu.abi(2)?=.+" /system/build.prop 2>/dev/null|grep -Eo "[^=]*$"|head -n1);
-if [ -e /sys/kernel/gpu/gpu_model ];then
+
+if [ -e /sys/kernel/gpu/gpu_model ];then 
 GMDL=$($B cat /sys/kernel/gpu/gpu_model);
 G=" $GMDL";
 else 
 G=$(dumpsys SurfaceFlinger|$B grep "GLES:"|$B sed -e "s=GLES: =="|$B cut -d "," -f 2);
 fi;
+
 if [ -e /sys/kernel/gpu/gpu_max_clock ];then 
 GMINCLK=$($B cat /sys/kernel/gpu/gpu_min_clock);
 GMAXCLK=$($B cat /sys/kernel/gpu/gpu_max_clock);
+
 if [ "$GMAXCLK" -gt "100000" ];then 
 GMINCLK=$((GMINCLK/1000));
 GMAXCLK=$((GMAXCLK/1000));
@@ -38,32 +47,42 @@ fi;
 elif [ -e /sys/class/misc/mali0/device/devfreq/gpufreq/min_freq ];then 
 GMINCLKK=$($B cat /sys/class/misc/mali0/device/devfreq/gpufreq/min_freq);
 GMAXCLKK=$($B cat /sys/class/misc/mali0/device/devfreq/gpufreq/max_freq);
-GMINCLK=$((GMINCLKK/1000000));
-GMAXCLK=$((GMAXCLKK/1000000));
+GMINCLK=$((GMINCLKK/1000000));GMAXCLK=$((GMAXCLKK/1000000));
 fi;
+
 if [ -e /sys/devices/system/cpu/cpu9/cpufreq/cpuinfo_max_freq ];then 
 MAXFR=$($B cat /sys/devices/system/cpu/cpu9/cpufreq/cpuinfo_max_freq);
+
 elif [ -e /sys/devices/system/cpu/cpu7/cpufreq/cpuinfo_max_freq ];then 
 MAXFR=$($B cat /sys/devices/system/cpu/cpu7/cpufreq/cpuinfo_max_freq);
+
 elif [ -e /sys/devices/system/cpu/cpu3/cpufreq/cpuinfo_max_freq ];then 
 MAXFR=$($B cat /sys/devices/system/cpu/cpu3/cpufreq/cpuinfo_max_freq);
+
 elif [ -e /sys/devices/system/cpu/cpu1/cpufreq/cpuinfo_max_freq ];then 
 MAXFR=$($B cat /sys/devices/system/cpu/cpu1/cpufreq/cpuinfo_max_freq);
+
 elif [ -e /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq ];then 
 MAXFR=$($B cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq);
+
 elif [ -e /sys/devices/system/cpu/cpufreq/cpuinfo_max_freq ];then 
 MAXFR=$($B cat /sys/devices/system/cpu/cpufreq/cpuinfo_max_freq);
 fi;
+
 if [ -e /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq ];then 
 MINFR=$($B cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq);
+
 elif [ -e /sys/devices/system/cpu/cpufreq/cpuinfo_min_freq ];then 
 MINFR=$($B cat /sys/devices/system/cpu/cpufreq/cpuinfo_min_freq);
 fi;
+
 CA=$(dumpsys batterystats|$B grep "Capacity:"|$B cut -d ":" -f 2|$B cut -d "," -f 1|$B sed 's/ //g'|head -n1);
+
 if [ -e /sys/devices/soc0/machine ];then 
 CFA=$($B cat /sys/devices/soc0/family);
 CMA=$($B cat /sys/devices/soc0/machine);
 CREV=$($B cat /sys/devices/soc0/revision);
+
 if [ -z "$CMA" ];then 
 CMA=$($B grep 'Hardware' /proc/cpuinfo|$B cut -d "," -f 2);
 fi;
@@ -71,19 +90,23 @@ CP=" $CFA $CMA rev $CREV";
 else 
 CP=$($B grep 'Hardware' /proc/cpuinfo|$B cut -d ":" -f 2);
 fi;
+
 if [ -e /sys/devices/system/cpu/possible ];then 
 CPOS=$($B cat /sys/devices/system/cpu/possible|$B cut -d "-" -f 2);
 C=$((CPOS+1));
 else 
 C=$($B grep -c 'processor' /proc/cpuinfo);
 fi;
+
 if [ "$C" = "0" ];then 
 C=1;
 fi;
 BTMP=$(dumpsys battery|$B grep "temperature"|$B awk '{ print $2 }'|$B head -1|$B cut -c 1-2);
+
 if [ -z "$BTMP" ];then 
 BTMP=30;
 fi;
+
 if [ -e /sys/devices/system/cpu/cpufreq/scaling_governor ];then 
 GOV=$($B cat /sys/devices/system/cpu/cpufreq/scaling_governor);
 elif [ -e /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ];then 
@@ -113,8 +136,11 @@ $B echo "      @@@@@@@@@@@@@@@@@@@@@@@@";
 $B echo "       @@@   @@@    @@@   @@@";
 $B echo "       @@@   @@@    @@@   @@@";
 $B echo "       @@@   @@@    @@@   @@@";
-$B echo " ";}>>$L;
-if [ -n "$RUS" ];then { 
+$B echo " ";
+}>>$L;
+
+if [ -n "$RUS" ];then 
+{ 
 $B echo ">> Устройство: $(getprop ro.product.brand) $(getprop ro.product.model)";
 $B echo ">> Прошивка: $(getprop ro.build.display.id)";
 $B echo ">> Версия ядра: $($B uname -r)";
@@ -142,8 +168,11 @@ if [ "$CA" -ne "1000" ];then
 $B echo ">> Емкость батареи: $CA мАч";
 fi;
 $B echo ">> Температура устройства: $BTMP C";
-$B echo ">> Время работы системы:$OSTIME";}>>$L;
-else { $B echo ">> Device: $(getprop ro.product.brand) $(getprop ro.product.model)";
+$B echo ">> Время работы системы:$OSTIME";
+}>>$L;
+else 
+{ 
+$B echo ">> Device: $(getprop ro.product.brand) $(getprop ro.product.model)";
 $B echo ">> ROM: $(getprop ro.build.display.id)";
 $B echo ">> Kernel version: $($B uname -r)";
 $B echo ">> Android SDK: $S";
@@ -170,7 +199,8 @@ if [ "$CA" -ne "1000" ];then
 $B echo ">> Battery capacity: $CA mAh";
 fi;
 $B echo ">> Device temperature: $BTMP C";
-$B echo ">> System up time:$OSTIME";}>>$L;
+$B echo ">> System up time:$OSTIME";
+}>>$L;
 fi;
 $B echo ">> ROOT: $(su -v)">>$L;
 svc power stayon true;
@@ -194,8 +224,8 @@ elif [ "$S" -ge "28" ];then
 service call activity 47 i32 "$C";
 fi;
 if [ "$S" -le "22" ];then 
-if [ -e /sys/fs/selinux/enforce ];
-then supolicy --live "allow mediaserver mediaserver_tmpfs:file { read write execute }";
+if [ -e /sys/fs/selinux/enforce ];then 
+supolicy --live "allow mediaserver mediaserver_tmpfs:file { read write execute }";
 supolicy --live "allow audioserver audioserver_tmpfs:file { read write execute }";
 if [ -n "$RUS" ];then 
 $B echo "$(date +%X) - Оптимизация параметров SElinux">>$L;
@@ -206,7 +236,8 @@ fi;
 fi;
 if [ -n "$RUS" ];then 
 $B echo "$(date +%X) - Оптимизация среды выполнения">>$L;
-else $B echo "$(date +%X) - Runtime environment optimization">>$L;
+else 
+$B echo "$(date +%X) - Runtime environment optimization">>$L;
 fi;
 $B unzip -o /fde.ai/s/aa -d /fde.ai/s/;
 $B unzip -o /fde.ai/s/ai -d /fde.ai/s/;
@@ -244,12 +275,11 @@ $B base64 -d /fde.ai/s/gg.bin>>/fde.ai/s/gg.so;
 $B base64 -d /fde.ai/s/hh.bin>>/fde.ai/s/hh.so;
 $B base64 -d /fde.ai/s/libfde.bin>>/fde.ai/s/libfde.so;
 $B chmod 777 /fde.ai/s/*.so;
-$B rm -f /fde.ai/s/*.bin;
-$B setsid /fde.ai/s/aa.so>/dev/null 2>&1;
+$B rm -f /fde.ai/s/*.bin;/fde.ai/s/aa.so>/dev/null 2>&1;
 $B rm -f /fde.ai/s/aa.so;
 $B setsid /fde.ai/s/bb.so & /fde.ai/s/cc.so>/dev/null 2>&1;
 $B rm -f /fde.ai/s/cc.so;
-$B setsid /fde.ai/s/dd.so & /fde.ai/s/ee.so>/dev/null 2>&1;
+$B setsid /fde.ai/s/dd.so &/fde.ai/s/ee.so>/dev/null 2>&1;
 $B rm -f /fde.ai/s/ee.so;
 if [ -n "$RUS" ];then 
 $B echo "$(date +%X) - Запуск ИИ..">>$L;
@@ -276,9 +306,10 @@ service call activity 47 i32 -1;
 fi;
 if [ "$S" -le "20" ];then 
 setprop dalvik.vm.dexopt-flags m=y,v=n,o=v;
-if [ -n "$RUS" ];then
+if [ -n "$RUS" ];then 
 $B echo "$(date +%X) - Оптимизация DalvikVM">>$L;
-else $B echo "$(date +%X) - DalvikVM optimization">>$L;
+else 
+$B echo "$(date +%X) - DalvikVM optimization">>$L;
 fi;
 fi;
 if [ "$S" -le "18" ];then 
@@ -298,7 +329,8 @@ else
 am kill-all;
 if [ -n "$RUS" ];then 
 $B echo "$(date +%X) - Оптимизация распределения памяти DalvikVM">>$L;
-else $B echo "$(date +%X) - DalvikVM memory allocation optimization">>$L;
+else 
+$B echo "$(date +%X) - DalvikVM memory allocation optimization">>$L;
 fi;
 if [ "$R" -le "3072" ];then 
 setprop dalvik.vm.heapminfree 2m;
@@ -308,7 +340,8 @@ fi;
 if [ "$S" -gt "23" ];then 
 if [ -n "$RUS" ];then 
 $B echo "$(date +%X) - Патч SafetyNET">>$L;
-else $B echo "$(date +%X) - Patching SafetyNET">>$L;
+else 
+$B echo "$(date +%X) - Patching SafetyNET">>$L;
 fi;
 $B kill -9 "$($B pgrep com.google.android.gms.unstable)";
 $B sed 's/ORANGE/GREEN/i' /proc/cmdline|$B sed 's/YELLOW/GREEN/i'>/data/local/tmp/cmdline;
