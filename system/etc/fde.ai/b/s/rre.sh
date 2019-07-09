@@ -47,7 +47,8 @@ fi;
 elif [ -e /sys/class/misc/mali0/device/devfreq/gpufreq/min_freq ];then 
 GMINCLKK=$($B cat /sys/class/misc/mali0/device/devfreq/gpufreq/min_freq);
 GMAXCLKK=$($B cat /sys/class/misc/mali0/device/devfreq/gpufreq/max_freq);
-GMINCLK=$((GMINCLKK/1000000));GMAXCLK=$((GMAXCLKK/1000000));
+GMINCLK=$((GMINCLKK/1000000));
+GMAXCLK=$((GMAXCLKK/1000000));
 fi;
 
 if [ -e /sys/devices/system/cpu/cpu9/cpufreq/cpuinfo_max_freq ];then 
