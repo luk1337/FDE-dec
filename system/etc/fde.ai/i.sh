@@ -97,7 +97,7 @@ $B sleep 0.5;
 { 
 $B echo " ";
 $B echo "### FDE.AI v4 | FeraVolt. 2019 ###";
-$B echo "fde_ver=4.11";
+$B echo "fde_ver=4.12";
 $B echo "ro.HOME_APP_ADJ=1";
 $B echo "persist.radio.ramdump=0";
 $B echo "pm.sleep_mode=1";
@@ -169,6 +169,7 @@ $B echo "ro.secure=1";
 $B echo "selinux.reload_policy=1";
 $B echo "ro.audio.flinger_standbytime_ms=300";
 $B echo "ro.config.hw_quickpoweron=true";
+$B echo "doze.pulse.notifications=true";
 }>>/data/local.prop;
 fi;
 
